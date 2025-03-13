@@ -1,0 +1,12 @@
+<div class="account bg-white shadow-md p-4 rounded">
+<h1 class="text-2xl font-semibold">Comptes de <%= params[:user] %></h1>
+<ul>
+  <% @accounts.each do |account| %>
+    <li class="border-b py-2">
+      <strong>Numéro de compte : </strong> <%= account["num_account"] %> - <strong> Solde : </strong><%= account["balance"].to_i %>FCFA - État : <strong class="text-red-700"> <%= account["state_account"] == 1 ? "Actif" : "Désactivé" %> </strong>
+      <!-- Vous pouvez ici ajouter les liens pour déposer, retirer, activer/désactiver, etc. -->
+    </li>
+  <% end %>
+</ul>
+<a href="/accounts">Retour</a>
+</div>

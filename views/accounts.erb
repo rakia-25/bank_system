@@ -1,0 +1,39 @@
+<h2 class="text-2xl font-bold mb-4">Liste des Comptes</h2>
+<div class="search bg-white shadow-md p-4 rounded">
+  <h1 class="text-[21px] font-bold mb-4">Rechercher  comptes</h1>
+<form action="/user/accounts" method="get">
+  <label for="user" class="block text-sm font-medium text-gray-700">Entrez le nom du propriétaire : </label>
+    <input type="text" name="user" id="user" required
+      class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+  <button type="submit" class="py-2 px-4 mt-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Afficher les comptes</button>
+</form>
+</div>
+<div class="account bg-white shadow-md p-4 rounded">
+<ul>
+    <% if @accounts.empty? %>
+        <li class="text-gray-500">Aucun compte trouvé.</li>
+    <% else %>
+        <% @accounts.each do |account| %>
+            <li class="border-b py-2">
+                <strong>Numéro du compte:</strong> <%= account["num_account"] %> -
+                <strong>Propriétaire: </strong><%= account["user"] %>
+                <strong>Solde:</strong> <%= account["balance"].to_i %> FCFA -
+                <strong class="text-red-700"><%= account["state_account"] == 1 ? "compte actif" : "compte desactiveé" %></strong>
+                <% if account["state_account"] == 1 %>
+        <!-- Bouton pour désactiver un compte actif -->
+        <form action="/accounts/<%= account["num_account"] %>/desactiver" method="post">
+          <button type="submit" class="inline-block px-4 py-2 mt-2 bg-red-600 text-white font-bold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Désactiver</button>
+        </form>
+        <a href="/accounts/<%= account["num_account"]%>/deposit" class="inline-block px-3 py-2 mt-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" >Déposer</a>
+        <a href="/accounts/<%= account["num_account"] %>/withdraw" class="inline-block px-3 py-2 mt-2 bg-pink-600 text-white font-bold rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500">Retirer</a>
+      <% else %>
+        <!-- Bouton pour activer un compte désactivé -->
+        <form action="/accounts/<%= account["num_account"] %>/activer" method="post">
+          <button type="submit" class="inline px-3 py-2 mt-2 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Activer</button>
+        </form>
+      <% end %>
+            </li>
+        <% end %>
+    <% end %>
+</ul>
+</div>

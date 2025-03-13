@@ -1,0 +1,21 @@
+<form action="/account/create" method="post" class="bg-white p-6 rounded-lg shadow-md">
+  <div class="mb-4">
+    <label for="num_account" class="block text-sm font-medium text-gray-700">Numéro de Compte</label>
+    <input type="text" name="num_account" id="num_account" value="<%= SecureRandom.uuid %>" readonly
+      class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+  </div>
+<div class="mb-4">
+    <label for="user" class="block text-sm font-medium text-gray-700">Propriétaire</label>
+    <input type="text" name="user" id="user" required
+      class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+  </div>
+  <div class="mb-4">
+    <label for="balance" class="block text-sm font-medium text-gray-700">Solde</label>
+    <input type="number" name="balance" id="balance" value="0"  min="0" readonly
+      class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+  </div>
+
+  <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+    Créer le compte
+  </button>
+</form>

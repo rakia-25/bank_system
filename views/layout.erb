@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Comptes</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+
+    <nav class="bg-gray-200 p-3">
+        <a href="/" class="px-2 text-blue-700">Accueil</a>
+        <a href="/accounts" class="px-2 text-blue-700">Voir les Comptes</a>
+    </nav>
+
+    <main class="p-6 ">
+        <%= yield %>  <!-- Ici, le contenu des pages va s'afficher -->
+    </main>
+
+
+</body>
+</html>
