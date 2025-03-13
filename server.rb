@@ -132,7 +132,7 @@ end
 get '/accounts/:num_account/withdraw' do |num|
   accounts = load_accounts()
   @account = accounts.find { |a| a["num_account"] == num }
-  erb:'withdraw ' # Affiche le formulaire de retrait (voir section Vue)
+  erb:'withdraw' 
 end
 
 post '/accounts/:num_account/withdraw' do |num|
@@ -152,7 +152,7 @@ post '/accounts/:num_account/withdraw' do |num|
   account = Account.from_hash(account_data)
   account.withdraw(amount)
     account_data["balance"] = account.balance  # Met à jour le solde dans les données du compte
-    save_accounts(accounts)  # Sauvegarde les comptes mis à jour
+    save_accounts(accounts) 
     redirect "/accounts"
 end
 
@@ -160,5 +160,5 @@ get '/user/accounts' do
   user_name = params["user"]
   accounts = load_accounts()
   @accounts = accounts.select { |account| account["user"] == user_name }
-  erb:'user_accounts' # Assurez-vous que cette vue existe pour afficher les comptes filtrés
+  erb:'user_accounts' 
 end
