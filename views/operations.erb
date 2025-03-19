@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opérations du compte</title>
+</head>
+<body>
+    <h1>Opérations du compte <%= @account.num_account %></h1>
+    <h2>Utilisateur : <%= @account.user %></h2>
+    <h3>Solde : <%= @account.balance %>€</h3>
+    
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Montant</th>
+            <th>Date</th>
+        </tr>
+        <% if @account.operations.empty? %>
+            <tr>
+                <td colspan="4">Aucune opération enregistrée</td>
+            </tr>
+        <% else %>
+            <% @account.operations.each do |operation| %>
+                <tr>
+                    <td><%= operation["id"] %></td>
+                    <td><%= operation["type"] %></td>
+                    <td><%= operation["amount"] %>€</td>
+                    <td><%= operation["date"] %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+
+    <a href="/accounts">Retour aux comptes</a>
+</body>
+</html>

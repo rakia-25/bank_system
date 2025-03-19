@@ -5,20 +5,23 @@ require 'json'
 ACCOUNTS_JSON ='accounts.json'
 
 class Account
-  attr_reader :num_account, :balance, :state_account, :user
+  attr_reader :num_account, :balance, :state_account, :user, :operations
   def initialize(user)
     @balance = 0
     @state_account=1
     @num_account=SecureRandom.uuid
+    @operations = []
     @user=user
   end
 
   def deposite(amount)
     @balance += amount
+    @operations << { type: "deposit", amount: amount, date: Time.now }
   end
 
   def withdraw(amount)
     @balance -= amount
+    @operations << { type: "withdraw", amount: amount, date: Time.now }
   end
 
   #serialiser
@@ -27,7 +30,8 @@ class Account
       "user" => @user,
       "num_account" => @num_account,
       "balance" => @balance,
-      "state_account" => @state_account
+      "state_account" => @state_account,
+      "operations" =>@operations
     }
   end
   #deserialiser
@@ -36,6 +40,7 @@ class Account
     account.instance_variable_set(:@num_account, hash["num_account"])
     account.instance_variable_set(:@balance, hash["balance"])
     account.instance_variable_set(:@state_account, hash["state_account"])
+    account.instance_variable_set(:@operations, hash["operations"] || [])
     return account
   end
 end
@@ -49,7 +54,6 @@ def load_accounts()
     accounts=[]
   end
 end
-
 def save_accounts(accounts)
   accounts_data=accounts.map(&:to_h)
   #pretty_generate fait le contraire de parse,elle convertit le tableau d'article en une chaine de caracteres au format JSON
@@ -125,6 +129,7 @@ post '/accounts/:num_account/deposit' do |num|
    account.deposite(amount)
     account_data["balance"] = account.balance  # Mettre à jour le solde dans le tableau
     save_accounts(accounts)  # Sauvegarder les comptes mis à jour
+    #Transactions_log.write_file("depot sur le compte";account["num_account"];Time.now;account["user"])
     redirect "/accounts"
 end
 
@@ -161,4 +166,16 @@ get '/user/accounts' do
   accounts = load_accounts()
   @accounts = accounts.select { |account| account["user"] == user_name }
   erb:'user_accounts' 
+end
+
+get '/accounts/:num_account/operations' do |num_account|
+  accounts = load_accounts()
+  account_data = accounts.find { |a| a["num_account"] == num_account }
+  if account_data.nil?
+    return "Compte non trouvé"
+  end
+  @account = Account.from_hash(account_data)
+  save_accounts(accounts)
+    # Convertir le hash en objet Account
+  erb :operations  # Afficher la page des opérations
 end

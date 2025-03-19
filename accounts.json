@@ -1,8 +1,45 @@
 [
   {
+    "user": "ousmane",
+    "num_account": "7c55ab08-8532-4185-ae77-a4ce9f670da9",
+    "balance": 100000,
+    "state_account": 1,
+    "operations": [
+      {
+        "type": "deposit",
+        "amount": 100000,
+        "date": "2025-03-17 12:41:48 +0100"
+      },
+      {
+        "type": "deposit",
+        "amount": 100,
+        "date": "2025-03-17 12:42:41 +0100"
+      },
+      {
+        "type": "withdraw",
+        "amount": 100,
+        "date": "2025-03-17 12:42:54 +0100"
+      }
+    ]
+  },
+  {
     "user": "rakia",
-    "num_account": "5092e8a9-0f9e-4a75-899b-88602e53fd79",
+    "num_account": "eac24699-6402-4073-82e9-42155523a3e8",
     "balance": 50000,
-    "state_account": 1
+    "state_account": 1,
+    "operations": [
+      {
+        "type": "deposit",
+        "amount": 50000,
+        "date": "2025-03-18 23:50:13 +0100"
+      }
+    ]
+  },
+  {
+    "user": "samira",
+    "num_account": "3093ae95-5d7a-47ea-99bc-b258ca7f2f49",
+    "balance": 0,
+    "state_account": 1,
+    "operations": []
   }
 ]

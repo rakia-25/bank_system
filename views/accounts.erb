@@ -26,6 +26,7 @@
         </form>
         <a href="/accounts/<%= account["num_account"]%>/deposit" class="inline-block px-3 py-2 mt-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" >Déposer</a>
         <a href="/accounts/<%= account["num_account"] %>/withdraw" class="inline-block px-3 py-2 mt-2 bg-pink-600 text-white font-bold rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500">Retirer</a>
+        <td><a href="/accounts/<%= account["num_account"] %>/operations">Voir les opérations</a></td>
       <% else %>
         <!-- Bouton pour activer un compte désactivé -->
         <form action="/accounts/<%= account["num_account"] %>/activer" method="post">
